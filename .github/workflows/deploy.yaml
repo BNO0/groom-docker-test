@@ -96,7 +96,9 @@ jobs:
         run: echo "${{ secrets.APPLICATION_YML_BACKEND}}" > ./backend/geniuses/src/main/resources/application.yml
         # working-directory: /app/backend
       - name: Gradle로 빌드(CI)
-        run: ./backend/geniuses/gradlew build
+        run: cd ./backend/geniuses
+        run: gradlew build
+        run: cd ../..
       
       # docker login
       - run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
