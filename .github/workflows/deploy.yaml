@@ -29,7 +29,7 @@ jobs:
       - run: docker push vlog-test-back-1020
 
       - name: Generate deployment package
-        run: zip -r deploy.zip . -x '*.git*'
+        run: zip -r deploy.zip ./backend/geniuses -x '*.git*'
 
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v18
@@ -45,7 +45,7 @@ jobs:
           existing_bucket_name: elasticbeanstalk-us-east-2-646588460992
           region: us-east-2
           version_label: ${{ github.sha }}
-          deployment_package: deploy.zip
+          deployment_package: deploy.zip ./backend/geniuses
           wait_for_environment_recovery: 500
 
       - uses: actions/checkout@v3
@@ -55,7 +55,7 @@ jobs:
       - run: docker push vlog-test-front-1020
 
       - name: Generate deployment package
-          run: zip -r deploy.zip . -x '*.git*'
+        run: zip -r deploy.zip ./frontend/geniuses -x '*.git*'
 
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v18
@@ -71,5 +71,5 @@ jobs:
           existing_bucket_name: elasticbeanstalk-us-east-2-646588460992
           region: us-east-2
           version_label: ${{ github.sha }}
-          deployment_package: deploy.zip
+          deployment_package: deploy.zip ./frontend/geniuses
           wait_for_environment_recovery: 500
