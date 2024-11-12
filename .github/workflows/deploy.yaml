@@ -73,7 +73,7 @@
 #           version_label: ${{ github.sha }}
 #           deployment_package: deploy.zip ./frontend/geniuses
 #           wait_for_environment_recovery: 500
-name: deploy backend
+name: deploy fullstack
 on:
   push:
     branches:
@@ -123,13 +123,6 @@ jobs:
           deployment_package: deploy.zip
           wait_for_environment_recovery: 500
 
-name: Deploy Frontend
-on:
-  push:
-    branches:
-      - main
-
-jobs:
   build:
     runs-on: ubuntu-latest
     steps:
