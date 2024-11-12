@@ -94,14 +94,14 @@ jobs:
         run: chmod +x ./backend/geniuses/gradlew
       - name: 환경변수 설정
         run: echo "${{ secrets.APPLICATION_YML_BACKEND}}" > ./backend/geniuses/src/main/resources/application.yml
-        working-directory: /app/backend
+        # working-directory: /app/backend
       - name: Gradle로 빌드(CI)
         run: ./backend/geniuses/gradlew build
       
       # docker login
       - run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-      - run: docker build -t vlog-test-back-1020 ./
-      # - run: docker push vlog-test-back-1020
+      - run: docker build -t vlog-test-back-final ./
+      # - run: docker push vlog-test-back-final
 
       - name: Generate deployment package
         run: zip -r deploy.zip . -x '*.git*'
@@ -123,13 +123,11 @@ jobs:
           deployment_package: deploy.zip
           wait_for_environment_recovery: 500
 
-  build:
-    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       # docker login
       - run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-      - run: docker build -t vlog-frontend ./frontend/geniuses
+      - run: docker build -t vlog-test-front-final ./frontend/geniuses
       # - run: docker run -e CI=true vlog-frontend npm test
 
       - name: Generate deployment package
