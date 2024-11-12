@@ -1,0 +1,30 @@
+# version: "3"
+# services:
+#   db:
+#     container_name: dockertest-db
+#     image: dockertest-db
+
+#   backend:
+#     build:
+#       context: ./backend/geniuses
+#       dockerfile: Dockerfile.dev
+#     ports:
+#       - "8080:8080"
+#     container_name: dockertest-backend-dev
+#     environment:
+
+#   frontend:
+#     build:
+#       context: ./frontend/geniuses
+#       dockerfile: Dockerfile.dev
+#     ports:
+#       - "3000:3000"
+#     volumes:
+#       - /app/node_modules
+#       - ./frontend/geniuses:/app
+  
+#   nginx:
+#     restart: always
+#     image: dockertest-nginx
+#     ports:
+#       - "80:80"

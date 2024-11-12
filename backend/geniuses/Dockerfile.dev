@@ -1,0 +1,29 @@
+# FROM bellsoft/liberica-openjdk-alpine:17 as builder
+# COPY gradlew ./
+# COPY gradle gradle
+# COPY build.gradle ./
+# COPY settings.gradle ./
+# COPY src src
+# RUN chmod +x ./gradlew
+# RUN ./gradlew dockertestJar
+
+# FROM bellsoft/liberica-openjdk-alpine:17
+# COPY --from-builder build/libs/*.jar app.jar
+# ENTRYPOINT ["java", "-jar", "/app.jar"]
+# VOLUME /tmp
+
+# openjdk 17 버전 기반으로하는 이미지 설저
+FROM bellsoft/liberica-openjdk-alpine:17
+# Gradle을 사용해 빌드 실행하는 명령어
+CMD ["./gradlew", "clean", "build"]
+# 컨테이너 내에 /tmp 경로를 볼륨으로 설정
+VOLUME /tmp
+# Gradle로 빌드한 jar 파일의 위치를 변수로 설정
+ARG JAR_FILE=build/libs/*.jar
+# ARG 명령어를 통해 JAR_FILE 변수에 지정된 파일을 app.jar 이름으로 컨테이너에 추가
+COPY ${JAR_FILE} app.jar
+# 컨테이너포트 설정
+EXPOSE 8080
+# 컨테이너 실행 시 기본적으로 실행될 명령어 설정
+# java -jar /app.jar : java app 실행 명령어
+ENTRYPOINT ["java", "-jar", "/app.jar"]

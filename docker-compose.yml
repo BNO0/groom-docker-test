@@ -1,0 +1,61 @@
+# version: "3"
+# services:
+#   frontend:
+#     image: dockertest-frontend
+#     volumes:
+#       - /app/node_modules
+#       - ./frontend/geniuses:/app
+#     stdin_open: true
+#     mem_limit: 128m
+  
+#   nginx:
+#     restart: always
+#     image: dockertest-nginx
+#     ports:
+#       - "80:80"
+  
+#   backend:
+#     image: dockertest-backend
+#     container_name: app_backend
+#     volumes:
+#       - /app/node_modules
+#       - ./backend/geniuses:/app
+#     mem_limit: 128m
+#     environment:
+#       GOOGLE_CLIENT_ID: $GOOGLE_CLIENT_ID
+#       GOOGLE_CLIENT_SECRET: $GOOGLE_CLIENT_SECRET
+#       JWT_SECRET: $JWT_SECRET
+#       KAKAO_CLIENT_ID: $KAKAO_CLIENT_ID
+#       KAKAO_CLIENT_SECRET: $KAKAO_CLIENT_SECRET
+
+
+# docker-compose https://velog.io/@g6y116/5
+# 환경변수 https://popcorn-overflow.tistory.com/17
+version: '3'
+services:
+  backend:
+    image: vlog-test-back
+    env_file:
+      - ./backend/geniuses/.env
+    ports:
+      - "8080:8080"
+    networks:
+      - network
+    environment:
+      GOOGLE_CLIENT_ID: $GOOGLE_CLIENT_ID
+      GOOGLE_CLIENT_SECRET: $GOOGLE_CLIENT_SECRET
+      JWT_SECRET: $JWT_SECRET
+      KAKAO_CLIENT_ID: $KAKAO_CLIENT_ID
+      KAKAO_CLIENT_SECRET: $KAKAO_CLIENT_SECRET
+
+  frontend:
+    image: vlog-test-front
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - network
+
+networks:
+  network:
