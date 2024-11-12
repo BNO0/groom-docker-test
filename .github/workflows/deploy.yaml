@@ -18,8 +18,8 @@ jobs:
       - name: Gradle Wrapper 실행 권한 추가
         run: chmod +x ./backend/geniuses/gradlew
       - name: 환경변수 설정
-        run: echo "${{ secrets.APPLICATION_YML_BACKEND}}" > backend/geniuses/src/main/resources/application.yml
-        working-directory: ./backend/geniuses/server/linode-github-action-test
+        run: echo "${{ secrets.APPLICATION_YML_BACKEND}}" > ./backend/geniuses/src/main/resources/application.yml
+        working-directory: ./backend/geniuses/app
       - name: Gradle로 빌드(CI)
         run: ./backend/geniuses/gradlew build
       
