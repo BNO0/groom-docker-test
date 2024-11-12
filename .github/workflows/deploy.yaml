@@ -94,7 +94,7 @@ jobs:
         run: chmod +x ./backend/geniuses/gradlew
       - name: 환경변수 설정
         run: echo "${{ secrets.APPLICATION_YML_BACKEND}}" > ./backend/geniuses/src/main/resources/application.yml
-        working-directory: ./backend/geniuses
+        working-directory: /app/backend
       - name: Gradle로 빌드(CI)
         run: ./backend/geniuses/gradlew build
       

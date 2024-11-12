@@ -14,7 +14,7 @@
 
 # https://velog.io/@g6y116/5
 FROM node:alpine as build
-WORKDIR /app
+WORKDIR /app/frontend
 COPY ./package.json ./
 RUN npm install
 COPY ./ ./
@@ -26,7 +26,7 @@ COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 # mime.types 파일을 복사
 COPY nginx/mime.types /etc/nginx/mime.types
 # 빌드된 리액트 앱을 Nginx의 HTML 디렉토리로 복사
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build /app/frontend/build /usr/share/nginx/html
 # 포트 설정
 EXPOSE 80
 # Nginx 실행
