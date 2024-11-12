@@ -17,7 +17,7 @@ FROM node:alpine as build
 WORKDIR /app
 COPY ./frontend/geniuses/package.json ./
 RUN npm install
-COPY ./frontend/geniuses ./
+COPY ./ ./
 RUN npm run build
 
 FROM nginx:alpine
