@@ -15,9 +15,9 @@
 # https://velog.io/@g6y116/5
 FROM node:alpine as build
 WORKDIR /app
-COPY ./package.json ./
+COPY ./frontend/geniuses/package.json ./
 RUN npm install
-COPY ./ ./
+COPY ./frontend/geniuses ./
 RUN npm run build
 
 FROM nginx:alpine
