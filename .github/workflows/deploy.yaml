@@ -97,6 +97,8 @@ jobs:
         # working-directory: /app/backend
       - name: cd ./backend/geniuses
         run: cd ./backend/geniuses
+      - name: ls
+        run: ls
       - name: Gradle로 빌드(CI)
         run: gradlew build
       - name: cd ../..
