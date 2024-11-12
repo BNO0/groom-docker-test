@@ -95,6 +95,8 @@ jobs:
       - name: 환경변수 설정
         run: echo "${{ secrets.APPLICATION_YML_BACKEND}}" > ./backend/geniuses/src/main/resources/application.yml
         # working-directory: /app/backend
+      - name: ls
+        run: ls
       - name: cd ./backend/geniuses
         run: cd ./backend/geniuses
       - name: ls
